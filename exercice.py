@@ -25,13 +25,34 @@ def get_bill(name, data):
 	result += "\n" + " TAXES {taxes : > 10.2f} $"
 	result += "\n" + " TOTAL {total : > 10.2f} $"
 
-
-
 	return ""
 
 
 def format_number(number, num_decimal_digits):
-	return ""
+    	#separer les parties entiere et decimale
+	decimal_part = abs(number) % 1.0
+	whole_part = int(abs(number))
+
+		# formater la partie decimale
+	decimal_str = f"(decimal_part :.(num_decimal_digits)f)"[1:]
+	# 0,12345 = 1.123 => arrondir
+	decimal_part = "." + str(int(round(decimal_part * 10**num_decimal_digits)))
+
+
+
+		# formater la partie entiere
+	whole_part = ""
+	while whole_part >= 1000:
+    		digits = whole_part % 1000
+			digits_str = f" {digits :0>3}"
+			whole_part_str = digits_str + whole_part_str
+			whole_part //= 1000
+		whole_part_str = str(whole_part) + whole_part_str
+
+
+		# concatener les deux parties)
+    	
+	return ("-" if number < 0) + whole_part_str
 
 def get_triangle(num_rows):
 	return ""
